@@ -26,19 +26,33 @@ The setup includes:
 
 ### 🔹 1. Install Active Directory Domain Services  
  
-- Connect to `DC-1` using **Remote Desktop** from Azure.  
-- Once inside the VM, click **Start → Server Manager**.  
+- Connect to `DC-1` using **Remote Desktop**  
+- Once inside the `DC-1` VM, click **Start → Server Manager**.  
 - In Server Manager, select **Add Roles and Features**.  
+
+![AD add roles](https://github.com/user-attachments/assets/a1db6bc9-623b-4b01-8046-0ac54fe7fc9d)
+
+
 - Click **Next** through the wizard until you reach *Server Roles*.  
 - Check **Active Directory Domain Services** → click **Next → Install**.  
 - Once installation finishes, a yellow flag appears in Server Manager. Click it → **Promote this server to a domain controller**.  
 - Choose **Add a new forest** → enter domain name: `mydomain.com`.  
 - Set a Directory Services Restore Mode (DSRM) password → click **Next** until **Install**.  
 - The server will restart.  
+
+![AD domain services](https://github.com/user-attachments/assets/7c5f88d4-d127-48df-8484-55eb0c1b696e)
+
+![AD server to DC](https://github.com/user-attachments/assets/ae012834-88e1-40b6-9117-33f8c4a90f50)
+
+![AD new forest](https://github.com/user-attachments/assets/830bf2c6-457a-4627-a19b-0b94800156c4)
+
 - Log back in using **domain credentials**: `mydomain.com\labuser`.  
 
-📸 Screenshot Example:  
-![Install AD DS](https://via.placeholder.com/600x300?text=Install+Active+Directory)  
+
+![AD domain login](https://github.com/user-attachments/assets/db65cf9b-24a9-4141-89d9-cf99a11e209b)
+
+
+ 
 
 ---
 
@@ -48,17 +62,27 @@ The setup includes:
 - Right-click the domain (`mydomain.com`) → **New → Organizational Unit (OU)**.  
   - Name the first OU `_EMPLOYEES`.  
   - Name the second OU `_ADMINS`.  
-- Right-click `_EMPLOYEES` → **New → User**.  
+
+![AD _EMPLOYEES OU](https://github.com/user-attachments/assets/5461847d-b6a2-4feb-84be-f6eceb389d2b)
+
+![AD _ADMINS OU](https://github.com/user-attachments/assets/73676180-ad02-4f45-85ca-69d93709238a)
+
+- Right-click `_ADMINS` → **New → User**.  
   - First Name: Jane, Last Name: Doe  
   - User Logon Name: `jane_admin`  
-  - Password: `Cyberlab123!`  
+  - Password: `**********`  
 - After creating the account, right-click `jane_admin` → **Add to a group** → enter `Domain Admins` → click OK.  
+
+![AD jane doe admin](https://github.com/user-attachments/assets/b6ccb19e-5c20-4939-898c-28cd44e53912)
+
+![AD jane doe domain admin](https://github.com/user-attachments/assets/28ad1116-0304-4b07-990e-850056038038)
+
+
 - Sign out of `DC-1`.  
 - Sign back in as `mydomain.com\jane_admin`.  
 - From now on, use this account (`jane_admin`) for all domain administration tasks.  
 
-📸 Screenshot Example:  
-![Create Domain Admin](https://via.placeholder.com/600x300?text=Create+Domain+Admin)  
+![AD Jane_doe domain login](https://github.com/user-attachments/assets/07729a57-a019-4668-a744-01dfcc968d70)
 
 ---
 
