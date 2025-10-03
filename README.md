@@ -1,2 +1,2 @@
-# Deploying-Active-Directory
+# Deploying Active Directory
 AD-Deployment
