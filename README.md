@@ -120,11 +120,61 @@ The setup includes:
 
 ---
 
-##  Outcome / Learnings  
-By completing this project, I:  
-- Installed and configured **Active Directory Domain Services** on a Windows Server VM.  
-- Created a **domain admin account** and structured resources using OUs.  
-- Successfully **joined a client machine** to the Active Directory domain.  
-- Strengthened skills in **domain management, user roles, and organizational structure**.  
+###  4. Setup Remote Desktop for Non-Admin Users  
+ 
+- Log into `Client-1` as `mydomain.com\jane_admin`.  
+- Right-click **Start Menu → System → Remote Desktop**.    
+- Under **“Select users that can remotely access this PC”** → add **Domain Users**.  
+- Now, any authenticated domain user can log into `Client-1`.  
+
+
+![AD domain users access](https://github.com/user-attachments/assets/9870d767-b864-4e14-b2c9-20c349d745b5)
+
+
+- *Note: In enterprise environments, this would typically be handled via **Group Policy** for multiple systems.*  
+
 
 ---
+
+###  5. Bulk User Creation with PowerShell  
+  
+- On `DC-1`, log in as `jane_admin`.  
+- Open **PowerShell ISE** as Administrator.  
+- Create a new script file → paste the bulk user creation [Script](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1) into it 
+
+```powershell
+# Example Script: Create 10 Users in the _EMPLOYEES OU
+Import-Module ActiveDirectory  
+
+For ($i=1; $i -le 10; $i++) {
+    $UserName = "User$i"
+    $Password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
+    New-ADUser -Name $UserName `
+               -AccountPassword $Password `
+               -Path "OU=_EMPLOYEES,DC=mydomain,DC=com" `
+               -Enabled $true
+}
+Run the script → observe user accounts being created.
+
+Open ADUC → confirm users appear inside the _EMPLOYEES OU.
+
+Test logging into Client-1 using one of the new users (e.g., mydomain.com\User1 with password Password123!).
+
+📸 Screenshot Example:
+
+
+ Outcome / Learnings
+
+By completing this project, I:
+
+Installed and configured Active Directory Domain Services.
+
+Created a domain admin account and structured resources with OUs.
+
+Successfully joined a Windows 10 client machine to the AD domain.
+
+Configured Remote Desktop access for non-admin domain users.
+
+Automated bulk user creation using PowerShell scripting.
+
+Gained practical experience with both GUI management tools and automation via scripting.
