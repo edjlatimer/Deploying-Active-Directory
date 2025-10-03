@@ -4,12 +4,18 @@
   <img src="https://i.imgur.com/pU5A58S.png" alt="Active Directory Logo" width="300"/>
 </p>  
 
-##  Overview  
-This project demonstrates how to install and configure **Active Directory Domain Services (AD DS)** 
-The setup includes:  
-- Promoting a **Windows Server 2022 VM** to a Domain Controller  
-- Creating a **domain admin account** and organizing resources in **OUs**  
-- Joining a **Windows 10 client machine** to the domain  
+##  Project Overview  
+This project demonstrates the **end-to-end deployment of Active Directory Domain Services (AD DS)** in an Azure-hosted lab environment. The goal was to simulate a small enterprise setup by:  
+
+- Deploying a **Windows Server 2022 VM** as the Domain Controller (`DC-1`).  
+- Installing **Active Directory Domain Services** and promoting the server to a new forest (`mydomain.com`).  
+- Creating **Organizational Units (OUs)** to logically structure users, admins, and client machines.  
+- Adding a **domain admin account** and leveraging it for privileged management.  
+- Deploying a **Windows 10 client VM (`Client-1`)**, joining it to the domain, and validating connectivity.  
+- Enabling **Remote Desktop** access for standard domain users (demonstrating real-world access configuration).  
+- Using **PowerShell automation** to bulk-create user accounts for testing domain login and management scalability.  
+
+This project showcases both **GUI-driven administration** (Server Manager, ADUC, System Properties) and **automation via scripting** (PowerShell for user provisioning).  
 
 ---
 
@@ -140,41 +146,43 @@ The setup includes:
   
 - On `DC-1`, log in as `jane_admin`.  
 - Open **PowerShell ISE** as Administrator.  
+
+![AD powershell ISE admin](https://github.com/user-attachments/assets/80c30ee6-6ff6-4d1c-bd40-4c051bc2f543)
+
+
 - Create a new script file → paste the bulk user creation [Script](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1) into it 
 
-```powershell
-# Example Script: Create 10 Users in the _EMPLOYEES OU
-Import-Module ActiveDirectory  
 
-For ($i=1; $i -le 10; $i++) {
-    $UserName = "User$i"
-    $Password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
-    New-ADUser -Name $UserName `
-               -AccountPassword $Password `
-               -Path "OU=_EMPLOYEES,DC=mydomain,DC=com" `
-               -Enabled $true
-}
 Run the script → observe user accounts being created.
+
+![AD bulk user script](https://github.com/user-attachments/assets/0ace2d67-2668-4295-9f09-e9d862becd78)
+![AD script running](https://github.com/user-attachments/assets/810cebc2-661d-4596-88b2-197abd9602b6)
 
 Open ADUC → confirm users appear inside the _EMPLOYEES OU.
 
-Test logging into Client-1 using one of the new users (e.g., mydomain.com\User1 with password Password123!).
+![AD bulk user login](https://github.com/user-attachments/assets/3ce65488-4d7e-452d-b3e7-89b8dd456575)
 
-📸 Screenshot Example:
+Test logging into Client-1 using one of the new users (e.g., `mydomain.com\bin.jux` with password `Password1`).
 
+![AD bulk user login confirm](https://github.com/user-attachments/assets/859d53e4-850b-48c2-8783-4dcfa99bf8d2)
 
- Outcome / Learnings
+![AD bulk user login confirm 2](https://github.com/user-attachments/assets/097e2ac9-3f8d-4cef-b49b-83a9478df44a)
 
-By completing this project, I:
+---
 
-Installed and configured Active Directory Domain Services.
+**Outcome / Learnings**
 
-Created a domain admin account and structured resources with OUs.
+**By completing this project, I:**
 
-Successfully joined a Windows 10 client machine to the AD domain.
+**- Installed and configured Active Directory Domain Services**
 
-Configured Remote Desktop access for non-admin domain users.
+**- Created a domain admin account and structured resources with OUs**
 
-Automated bulk user creation using PowerShell scripting.
+**- Successfully joined a Windows 10 client machine to the AD domain**
 
-Gained practical experience with both GUI management tools and automation via scripting.
+**- Configured Remote Desktop access for non-admin domain users**
+
+**- Automated bulk user creation using PowerShell scripting**
+
+**- Gained practical experience with both GUI management tools and automation via 
+    scripting**
