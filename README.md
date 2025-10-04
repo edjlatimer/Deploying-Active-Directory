@@ -14,8 +14,7 @@ This project demonstrates the **end-to-end deployment of Active Directory Domain
 - Deploying a **Windows 10 client VM (`Client-1`)**, joining it to the domain, and validating connectivity.  
 - Enabling **Remote Desktop** access for standard domain users (demonstrating real-world access configuration).  
 - Using **PowerShell automation** to bulk-create user accounts for testing domain login and management scalability.  
-
-This project showcases both **GUI-driven administration** (Server Manager, ADUC, System Properties) and **automation via scripting** (PowerShell for user provisioning).  
+ 
 
 ---
 
