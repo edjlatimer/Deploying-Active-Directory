@@ -173,15 +173,10 @@ Test logging into Client-1 using one of the new users (e.g., `mydomain.com\bin.j
 
 **By completing this project, I:**
 
-**- Installed and configured Active Directory Domain Services**
-
-**- Created a domain admin account and structured resources with OUs**
-
-**- Successfully joined a Windows 10 client machine to the AD domain**
-
-**- Configured Remote Desktop access for non-admin domain users**
-
-**- Automated bulk user creation using PowerShell scripting**
-
-**- Gained practical experience with both GUI management tools and automation via 
-    scripting**
+- Installed and configured Active Directory Domain Services
+- Created a domain admin account and structured resources with OUs
+- Successfully joined a Windows 10 client machine to the AD domain
+- Configured Remote Desktop access for non-admin domain users
+- Automated bulk user creation using PowerShell scripting
+- Gained practical experience with both GUI management tools and automation via 
+  scripting
